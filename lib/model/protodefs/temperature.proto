@@ -1,0 +1,21 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+package Temperature;
+option go_package = "temperaturepb";
+
+// Temperature @Id == temperatrure
+message Temperature {
+  float Id = 1;
+  google.protobuf.Timestamp Data = 2;
+}
+
+message nil {}
+message NewTemperatureRequest { Temperature temp = 1; }
+message NewTemperatureResponse { repeated string message = 1; }
+message GetLast5tempResponse { repeated Temperature temps = 1;};
+
+service TemperatureService {
+  rpc NewTemperature(NewTemperatureRequest) returns (NewTemperatureResponse) {};
+  // rpc GetLast5Temp(nil) returns (GetLast5tempResponse) {};
+}
